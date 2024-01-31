@@ -15,7 +15,7 @@ const port = process.env.PORT || 5001;
 
 app.get("/", (_req, res) => {
   const ipAddress = IP.address();
-  res.send(ipAddress);
+  res.json(ipAddress);
 });
 
 // Generic logging middleware.
