@@ -1,6 +1,7 @@
 // const cors = require("cors");
 const jsonServer = require("json-server");
 const path = require("path");
+const IP = require("ip");
 
 const app = jsonServer.create();
 const router = jsonServer.router(path.join(__dirname, "data", "db.json"));
@@ -11,12 +12,10 @@ const port = process.env.PORT || 5001;
 // app.use(cors());
 
 // Index route message.
-app.get("/", (_req, _res, next) => {
-  // res.send(`Welcome to Student Dashboard Reboot. Use the '/students' resource to GET your data`)
-  next({
-    message: `Welcome to Student Dashboard Reboot. Use the '/api/students' endpoint to GET your student data`,
-    status: 200
-  });
+
+app.get("/", (_req, res) => {
+  const ipAddress = IP.address();
+  res.send(ipAddress);
 });
 
 // Generic logging middleware.
@@ -33,5 +32,5 @@ app.use(
 );
 
 app.listen(port, () => {
-  console.log(`Listening on port: ${port}`)
+  console.log(`Listening on port: ${port}`);
 });
